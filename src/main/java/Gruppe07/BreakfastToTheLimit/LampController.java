@@ -27,7 +27,6 @@ public class LampController {
 			if (strobe && !strobing) {
 				for (Lamp l : lamplist) {
 					strobe();
-					//l.strobeOn();
 				}
 				strobing = true;
 			} else if (!strobe) {
@@ -36,7 +35,6 @@ public class LampController {
 				}
 				strobing = false;
 				for (int index = lamplist.size() - 1; index >= 0; index--) {
-					//lamplist.get(index).strobeOff();
 					lamplist.get(index).setColor(LampColor.getColor(i[index]));
 				}
 			}
