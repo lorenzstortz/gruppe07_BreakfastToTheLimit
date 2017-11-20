@@ -26,19 +26,53 @@ public class LampController {
 			}
 			if (strobe && !strobing) {
 				for (Lamp l : lamplist) {
-					l.strobeOn();
+					strobe();
+					//l.strobeOn();
 				}
 				strobing = true;
 			} else if (!strobe) {
-				for (int index = lamplist.size() - 1; index >= 0; index--) {
-					lamplist.get(index).strobeOff();
-					lamplist.get(index).setColor(LampColor.getColor(i[index]));
+				for (Lamp l : lamplist) {
+					l.setColor(LampColor.ON);
 				}
 				strobing = false;
+				for (int index = lamplist.size() - 1; index >= 0; index--) {
+					//lamplist.get(index).strobeOff();
+					lamplist.get(index).setColor(LampColor.getColor(i[index]));
+				}
 			}
 			
 		}
 		
 		
-		
+		//added
+		public void strobe() {
+			
+			for (Lamp l : lamplist) {
+				l.setColor(LampColor.RED);
+			}
+			
+			Thread strobeThread = new Thread() {
+				public void run() {
+					System.out.println("Strobe started");
+					while (strobing) {
+						try {
+							Thread.sleep(500);
+							for (Lamp l : lamplist) {
+								l.setColor(LampColor.OFF);
+							}
+							
+							Thread.sleep(500); 
+							for (Lamp l : lamplist) {
+								l.setColor(LampColor.ON);
+							}
+							
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}		
+
+				}
+			};
+			strobeThread.start();
+		}
 }

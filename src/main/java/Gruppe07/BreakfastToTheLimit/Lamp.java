@@ -56,33 +56,5 @@ public class Lamp {
 			System.out.println(e);
 		}
 	}
-	
-	public void strobeOn() {
-		setColor(LampColor.RED);
-		strobeOn = true;
-		Thread strobeThread = new Thread() {
-			public void run() {
-				System.out.println("Strobe started");
-				while (strobeOn) {
-					try {
-						Thread.sleep(500);
-						setColor(LampColor.OFF);
-						Thread.sleep(500); 
-						setColor(LampColor.ON);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}		
-
-			}
-		};
-		strobeThread.start();
-	}
-	
-	public void strobeOff() {
-		setColor(LampColor.ON);
-		strobeOn = false;
-		System.out.println("strobe stopped");
-	}
 
 }
