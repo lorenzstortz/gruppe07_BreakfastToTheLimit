@@ -6,7 +6,7 @@ package Gruppe07.BreakfastToTheLimit;
  */
 public class App {
 	private static final String GOOGLE_API_KEY = "AIzaSyAd40gDCh2eFTHVr6ocvmyElOf7J93BYrQ";
-	private static final String username = "newdeveloper";
+	private static final String username = "2217334838210e7f244460f83b42026f";
 	  
   public static void main(String[] args) {
 	  
@@ -18,18 +18,14 @@ public class App {
 	  minutes[2] = 20;
  	  
 	  try {
-		  
 		  lampcont.checkLampColor(minutes);
-		  Thread.sleep(2000);
-		  minutes[0] = 10;
-		  lampcont.checkLampColor(minutes);
-		  Thread.sleep(2000);
+		  Thread.sleep(1000);
 		  minutes[0] = 2;
 		  lampcont.checkLampColor(minutes);
-		  Thread.sleep(2000);
+		  Thread.sleep(1000);
 		  minutes[0] = 1;
 		  lampcont.checkLampColor(minutes);
-		  Thread.sleep(2000);
+		  Thread.sleep(1000);
 		  minutes[0] = 0;
 		  lampcont.checkLampColor(minutes);
 		  Thread.sleep(10000);

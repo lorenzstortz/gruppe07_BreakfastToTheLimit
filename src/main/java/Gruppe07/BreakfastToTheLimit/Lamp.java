@@ -15,7 +15,7 @@ public class Lamp {
 	
 	public Lamp (String username, int number) {
 		try {
-			urlLamp = new URL("http://localhost:80/api/" + username + "/lights/" + number + "/state");	
+			urlLamp = new URL("http://10.28.9.122/api/" + username + "/lights/" + number + "/state");	
 			HttpURLConnection connTarget = (HttpURLConnection) urlLamp.openConnection();
 			connTarget.setRequestMethod("PUT");
 			connTarget.setDoOutput(true);
@@ -57,4 +57,31 @@ public class Lamp {
 		}
 	}
 
+	public void strobeStart() {
+		strobeOn = true;
+		setColor(LampColor.RED);
+		Thread strobeThread = new Thread() {
+			public void run() {
+				System.out.println("Strobe started");
+				while (strobeOn) {
+					try {
+						Thread.sleep(1000);
+						setColor(LampColor.OFF);
+						
+						Thread.sleep(1000); 
+						setColor(LampColor.ON);
+						
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}		
+
+			}
+		};
+		strobeThread.start();
+	}
+	
+	public void strobeStop() {
+		strobeOn = false;
+	}
 }
