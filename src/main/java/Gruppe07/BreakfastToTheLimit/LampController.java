@@ -18,7 +18,7 @@ public class LampController {
 		public void checkLampColor (int[] i) {
 			boolean strobe = false;
 			for (int min : i) {
-				if (min <= 0) {
+				if (min <= 0 && min > -3) {
 					strobe = true;
 				}
 			}

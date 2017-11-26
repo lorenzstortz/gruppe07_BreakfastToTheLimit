@@ -15,7 +15,9 @@ public class Lamp {
 	
 	public Lamp (String username, int number) {
 		try {
-			urlLamp = new URL("http://10.28.9.122/api/" + username + "/lights/" + number + "/state");	
+			if(App.isDebugEnabled()) urlLamp = new URL("http://localhost:8000/api/" + username + "/lights/" + number + "/state");
+			else urlLamp = new URL("http://10.28.9.122/api/" + username + "/lights/" + number + "/state");
+
 			HttpURLConnection connTarget = (HttpURLConnection) urlLamp.openConnection();
 			connTarget.setRequestMethod("PUT");
 			connTarget.setDoOutput(true);
@@ -23,14 +25,15 @@ public class Lamp {
 			os.write(LampColor.WHITE.getBody() + "\r\n");
 			os.write("\r\n");
 			os.flush();
-			System.out.println("Request send");
-			BufferedReader is = new BufferedReader(new InputStreamReader (connTarget.getInputStream()));
-			
-			String input;
-			while ((input = is.readLine()) != null) {
-				System.out.println(input);
+			if(App.isDebugEnabled()){
+				System.out.println("Request send");
+				BufferedReader is = new BufferedReader(new InputStreamReader (connTarget.getInputStream()));
+
+				String input;
+				while ((input = is.readLine()) != null) {
+					System.out.println(input);
+				}
 			}
-				
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -45,12 +48,13 @@ public class Lamp {
 			os.write(lampcolor.getBody() + "\r\n");
 			os.write("\r\n");
 			os.flush();
-			System.out.println("Request send");
-
-			BufferedReader is = new BufferedReader(new InputStreamReader (connTarget.getInputStream()));
-			String input;
-			while ((input = is.readLine()) != null) {
-				System.out.println(input);
+			if(App.isDebugEnabled()) {
+				System.out.println("Request send");
+				BufferedReader is = new BufferedReader(new InputStreamReader(connTarget.getInputStream()));
+				String input;
+				while ((input = is.readLine()) != null) {
+					System.out.println(input);
+				}
 			}
 		} catch (IOException e) {
 			System.out.println(e);

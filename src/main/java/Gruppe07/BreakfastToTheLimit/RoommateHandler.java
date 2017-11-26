@@ -39,7 +39,6 @@ public class RoommateHandler implements Runnable {
   public void run() {
     while (true) {
       try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
-        Thread.sleep(5000);
         HttpGet httpget = new HttpGet(GOOGLE_BASE + "&origins=" + roommate.getOrigin()
             + "&destinations=" + roommate.getDestination() + "&mode=" + roommate.getMode() + "&key="
             + GOOGLE_API_KEY);
@@ -67,8 +66,11 @@ public class RoommateHandler implements Runnable {
         // System.out.println(responseBody);
 
         ResponseData test = GSON.fromJson(responseBody, ResponseData.class);
-        System.out.println(roommate.getName() + " braucht momentan so lange:"
-            + test.rows.get(0).elements.get(0).duration.text);
+        int timeNeeded = test.rows.get(0).elements.get(0).duration.value;
+        roommate.setTravelTimeInSeconds(timeNeeded);
+//        System.out.println(roommate.getName() + " braucht momentan so lange:"
+//            + test.rows.get(0).elements.get(0).duration.text);
+        Thread.sleep(5000);
 
       } catch (Exception e) {
 

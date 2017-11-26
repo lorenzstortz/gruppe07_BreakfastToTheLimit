@@ -20,9 +20,9 @@ public enum LampColor {
 	}
 	
 	public static LampColor getColor(int i) {
-		if (i <= 1) {
+		if (i <= 1 && i > -3) {
 			return RED; 
-		} else if (i <= 2) {
+		} else if (i <= 2 && i > -3) {
 			return ORANGE;
 		} else {
 			return WHITE;

@@ -1,5 +1,7 @@
 package Gruppe07.BreakfastToTheLimit.model;
 
+import org.joda.time.DateTime;
+
 public class Roommate {
 
   private String name;
@@ -10,11 +12,14 @@ public class Roommate {
 
   private String mode;
 
-  private int hour;
+  private int hourOfArrival;
 
-  private int minutes;
+  private int minutesOfArrival;
 
-  private int remainingTime;
+  private boolean left = false;
+
+
+  private int travelTimeInSeconds = 100000; //dummy value
 
   public Roommate(String name, String destination, String origin, String mode, int hour,
       int minutes) {
@@ -22,8 +27,8 @@ public class Roommate {
     this.mode = mode;
     this.origin = origin;
     this.destination = destination;
-    this.hour = hour;
-    this.minutes = minutes;
+    this.hourOfArrival = hour;
+    this.minutesOfArrival = minutes;
   }
 
   public String getName() {
@@ -58,20 +63,48 @@ public class Roommate {
     this.mode = mode;
   }
 
-  public int getHour() {
-    return hour;
+  public int getTravelTimeInSeconds(){
+    return travelTimeInSeconds;
   }
 
-  public void setHour(int hour) {
-    this.hour = hour;
+  public int getTravelTimeInMinutes() {
+    return travelTimeInSeconds /60;
   }
 
-  public int getMinutes() {
-    return minutes;
+  public int getHourOfArrival() {
+    return hourOfArrival;
   }
 
-  public void setMinutes(int minutes) {
-    this.minutes = minutes;
+  public void setHourOfArrival(int hourOfArrival) {
+    this.hourOfArrival = hourOfArrival;
   }
 
+  public int getMinutesOfArrival() {
+    return minutesOfArrival;
+  }
+
+  public void setMinutesOfArrival(int minutesOfArrival) {
+    this.minutesOfArrival = minutesOfArrival;
+  }
+
+  public void setTravelTimeInSeconds(int travelTimeInSeconds) {
+    this.travelTimeInSeconds = travelTimeInSeconds;
+  }
+
+  public int getRemainingTimeInMinutes(){
+      DateTime dt = new DateTime();
+      int secondofTheDay = dt.getSecondOfDay();
+      int secondOfArrival = (hourOfArrival*60+minutesOfArrival)*60;
+      int remaining = ((secondOfArrival-secondofTheDay) -travelTimeInSeconds)/60;
+      return remaining;
+  }
+
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public void setLeft(boolean left) {
+        this.left = left;
+    }
 }
