@@ -15,7 +15,7 @@ public class Lamp {
 	
 	public Lamp (String username, int number) {
 		try {
-			if(App.isDebugEnabled()) urlLamp = new URL("http://localhost:8000/api/" + username + "/lights/" + number + "/state");
+			if(App.isEmulatorEnabled()) urlLamp = new URL("http://localhost:8000/api/" + username + "/lights/" + number + "/state");
 			else urlLamp = new URL("http://10.28.9.122/api/" + username + "/lights/" + number + "/state");
 
 			HttpURLConnection connTarget = (HttpURLConnection) urlLamp.openConnection();
@@ -25,15 +25,16 @@ public class Lamp {
 			os.write(LampColor.WHITE.getBody() + "\r\n");
 			os.write("\r\n");
 			os.flush();
-			if(App.isDebugEnabled()){
-				System.out.println("Request send");
+
+				if(App.isDebugEnabled())System.out.println("Request send");
 				BufferedReader is = new BufferedReader(new InputStreamReader (connTarget.getInputStream()));
 
 				String input;
 				while ((input = is.readLine()) != null) {
-					System.out.println(input);
+					if(input.contains("error"))throw new IOException();
+					if(App.isDebugEnabled())System.out.println(input);
 				}
-			}
+
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -48,14 +49,15 @@ public class Lamp {
 			os.write(lampcolor.getBody() + "\r\n");
 			os.write("\r\n");
 			os.flush();
-			if(App.isDebugEnabled()) {
-				System.out.println("Request send");
+
+			if(App.isDebugEnabled())System.out.println("Request send");
 				BufferedReader is = new BufferedReader(new InputStreamReader(connTarget.getInputStream()));
 				String input;
 				while ((input = is.readLine()) != null) {
-					System.out.println(input);
+					if(input.contains("error"))throw new IOException();
+					if(App.isDebugEnabled())System.out.println(input);
 				}
-			}
+
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -66,7 +68,7 @@ public class Lamp {
 		setColor(LampColor.RED);
 		Thread strobeThread = new Thread() {
 			public void run() {
-				System.out.println("Strobe started");
+				if(App.isDebugEnabled())System.out.println("Strobe started");
 				while (strobeOn) {
 					try {
 						Thread.sleep(1000);
