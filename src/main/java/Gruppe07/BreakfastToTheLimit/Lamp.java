@@ -16,7 +16,7 @@ public class Lamp {
 	public Lamp (String username, int number) {
 		try {
 			if(App.isEmulatorEnabled()) urlLamp = new URL("http://localhost:8000/api/" + username + "/lights/" + number + "/state");
-			else urlLamp = new URL("http://10.28.9.122/api/" + username + "/lights/" + number + "/state");
+			else urlLamp = new URL("http://10.28.9.123/api/" + username + "/lights/" + number + "/state");
 
 			HttpURLConnection connTarget = (HttpURLConnection) urlLamp.openConnection();
 			connTarget.setRequestMethod("PUT");

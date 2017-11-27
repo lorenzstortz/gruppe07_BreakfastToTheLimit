@@ -1,7 +1,5 @@
 package Gruppe07.BreakfastToTheLimit;
 
-import Gruppe07.BreakfastToTheLimit.model.Roommate;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +11,7 @@ import java.util.Scanner;
 public class App {
     private static final String GOOGLE_API_KEY = "AIzaSyAd40gDCh2eFTHVr6ocvmyElOf7J93BYrQ";
 
-    private static String username = "2217334838210e7f244460f83b42026f";
+    private static String username = "2b2d3ff23d63751f10c1d8c0332d50ff";
     private static String usernameEmulator = "newdeveloper";
 
     private static boolean running = true;
@@ -27,7 +25,7 @@ public class App {
         if (!acceptUserInput()) {
             Roommate roommate1 = new Roommate("Paula Puenktlich", "Poing", "Hochschule+München", "bycicling", 18, 40);
             Roommate roommate2 = new Roommate("Lothar Late", "Ostbahnhof", "Hochschule+München", "car", 19, 30);
-            Roommate roommate3 = new Roommate("Ich Selber", "Hochschule+München", "Hochschule+München", "car", 15, 40);
+            Roommate roommate3 = new Roommate("Ich Selber", "Hochschule+München", "Hochschule+München", "car", 18, 18);
             roommates.add(roommate1);
             roommates.add(roommate2);
             roommates.add(roommate3);
@@ -98,7 +96,6 @@ public class App {
                 break;
             } else if (s.equals("n") || s.equals("N")) {
                 emulator = false;
-                username = usernameEmulator;
                 break;
             }
         }

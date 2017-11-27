@@ -14,8 +14,6 @@ import org.apache.http.util.EntityUtils;
 
 import com.google.gson.Gson;
 
-import Gruppe07.BreakfastToTheLimit.model.Roommate;
-
 /**
  * @author sieber, stortz
  *

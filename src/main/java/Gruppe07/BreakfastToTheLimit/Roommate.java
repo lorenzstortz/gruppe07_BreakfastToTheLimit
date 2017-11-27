@@ -1,4 +1,4 @@
-package Gruppe07.BreakfastToTheLimit.model;
+package Gruppe07.BreakfastToTheLimit;
 
 import org.joda.time.DateTime;
 
