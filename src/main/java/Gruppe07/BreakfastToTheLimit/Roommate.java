@@ -2,6 +2,11 @@ package Gruppe07.BreakfastToTheLimit;
 
 import org.joda.time.DateTime;
 
+
+/**
+ * @author sieber, stortz
+ *
+ */
 public class Roommate {
 
   private String name;

@@ -23,9 +23,9 @@ public class App {
 
         askForTestMode();
         if (!acceptUserInput()) {
-            Roommate roommate1 = new Roommate("Paula Puenktlich", "Poing", "Hochschule+München", "bycicling", 18, 40);
-            Roommate roommate2 = new Roommate("Lothar Late", "Ostbahnhof", "Hochschule+München", "car", 19, 30);
-            Roommate roommate3 = new Roommate("Ich Selber", "Hochschule+München", "Hochschule+München", "car", 18, 18);
+            Roommate roommate1 = new Roommate("Paula Puenktlich", "Poing", "Lothstraße+64,+München", "bycicling", 18, 40);
+            Roommate roommate2 = new Roommate("Lothar Late", "Ostbahnhof", "Lothstraße+64,+München", "driving", 19, 30);
+            Roommate roommate3 = new Roommate("Ich Selber", "Lothstraße+64,+München", "Lothstraße+64,+München", "car", 16, 14);
             roommates.add(roommate1);
             roommates.add(roommate2);
             roommates.add(roommate3);

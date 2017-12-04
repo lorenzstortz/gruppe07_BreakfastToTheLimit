@@ -1,5 +1,10 @@
 package Gruppe07.BreakfastToTheLimit;
 
+
+/**
+ * @author sieber, stortz
+ *
+ */
 public enum LampColor {
 	
 	WHITE("{\"on\":true, \"sat\":0, \"bri\":254, \"hue\":0}"),

@@ -24,9 +24,6 @@ public class RoommateHandler implements Runnable {
   private static final String GOOGLE_BASE = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric";
 
   private static Gson GSON = new Gson();
-
-  private int remainingTime;
-
   private Roommate roommate;
 
   public RoommateHandler(Roommate roommate) {
@@ -37,13 +34,13 @@ public class RoommateHandler implements Runnable {
   public void run() {
     while (true) {
       try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+        long currentTimeInSeconds = java.time.Instant.now().getEpochSecond();
         HttpGet httpget = new HttpGet(GOOGLE_BASE + "&origins=" + roommate.getOrigin()
-            + "&destinations=" + roommate.getDestination() + "&mode=" + roommate.getMode() + "&key="
-            + GOOGLE_API_KEY);
+            + "&destinations=" + roommate.getDestination() + "&mode=" + roommate.getMode()
+            + "&key=" + GOOGLE_API_KEY + "&departure_time="+ currentTimeInSeconds);
 
-        // System.out.println("Executing request " + httpget.getRequestLine());
+        if(App.isDebugEnabled())System.out.println("Executing request " + httpget.getRequestLine());
 
-        // Create a custom response handler
         ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
 
           @Override
@@ -60,14 +57,14 @@ public class RoommateHandler implements Runnable {
 
         };
         String responseBody = httpclient.execute(httpget, responseHandler);
-        // System.out.println("----------------------------------------");
-        // System.out.println(responseBody);
+        if(App.isDebugEnabled())System.out.println("----------------------------------------");
+        if(App.isDebugEnabled())System.out.println(responseBody);
 
         ResponseData test = GSON.fromJson(responseBody, ResponseData.class);
-        int timeNeeded = test.rows.get(0).elements.get(0).duration.value;
+        int timeNeeded = test.rows.get(0).elements.get(0).duration_in_traffic.value;
         roommate.setTravelTimeInSeconds(timeNeeded);
-//        System.out.println(roommate.getName() + " braucht momentan so lange:"
-//            + test.rows.get(0).elements.get(0).duration.text);
+        if(App.isDebugEnabled())System.out.println(roommate.getName() + " braucht momentan so lange:"
+           + test.rows.get(0).elements.get(0).duration_in_traffic.text);
         Thread.sleep(5000);
 
       } catch (Exception e) {
@@ -76,10 +73,6 @@ public class RoommateHandler implements Runnable {
 
     }
 
-  }
-
-  private void sendTime() {
-    System.out.println("Time remaining for xy:" + remainingTime + "s");
   }
 
   // DATA SLAVES
@@ -91,23 +84,20 @@ public class RoommateHandler implements Runnable {
 
   private class Row {
     List<Element> elements;
-
   }
 
   private class Element {
-    General duration;
-    General distance;
-    String status;
+    //General duration;
+    //General distance;
+    General duration_in_traffic;
+    //String status;
+
 
   }
 
   private class General {
     String text;
     int value;
-
-    public String toString() {
-      return "duration{" + "text=" + text + ", value=" + value + '}';
-    }
   }
 
 }

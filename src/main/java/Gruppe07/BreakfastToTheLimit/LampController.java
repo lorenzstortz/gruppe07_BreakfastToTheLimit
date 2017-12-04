@@ -2,6 +2,11 @@ package Gruppe07.BreakfastToTheLimit;
 
 import java.util.ArrayList;
 
+
+/**
+ * @author sieber, stortz
+ *
+ */
 public class LampController {
 
 		private ArrayList<Lamp> lamplist;

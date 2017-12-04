@@ -8,6 +8,11 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
+/**
+ * @author sieber, stortz
+ *
+ */
 public class Lamp {
 	private URL urlLamp;
 	private boolean strobeOn = false;
